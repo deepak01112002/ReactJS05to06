@@ -9,6 +9,7 @@ function Product() {
         price: "",
         img: ""
     })
+    const [valid ,setValid] = useState(false)
     const [arr, setArr] = useState([])
 
     const handleChange = (e) => {
@@ -19,6 +20,10 @@ function Product() {
     }
     const handleSubmit = (e) => {
         e.preventDefault()
+        if(state.title.length < 3){
+            setValid(true)
+            return;
+        }
         setArr([...arr, state])
     }
     
@@ -27,7 +32,7 @@ function Product() {
         <div>
             <button onClick={() => setSwi(false)}>Product</button>
             <button onClick={() => setSwi(true)}>Form</button>
-            {swi ? <ProductForm handleChange={handleChange} handleSubmit={handleSubmit} /> : <ProductList arr={arr} />}
+            {swi ? <ProductForm state={state} handleChange={handleChange} handleSubmit={handleSubmit} /> : <ProductList arr={arr} />}
         </div>
     )
 }
